@@ -9,8 +9,7 @@ test('add items and checkout flow', async ({ loginPage, productsPage, cartPage }
   await productsPage.addToCart('sauce-labs-backpack');
   await productsPage.openCart();
 
-  const count = await cartPage.itemCount();
-  expect(count).toBe(1);
+  await cartPage.expectItemCount(1);
 
   await cartPage.checkout();
 });

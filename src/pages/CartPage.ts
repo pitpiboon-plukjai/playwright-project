@@ -1,5 +1,5 @@
 import { BasePage } from './BasePage';
-import { Page } from '@playwright/test';
+import { Page, expect } from '@playwright/test';
 
 export class CartPage extends BasePage {
   readonly checkoutBtn = '#checkout';
@@ -14,6 +14,10 @@ export class CartPage extends BasePage {
   }
 
   async itemCount() {
-    return (await this.page.$$(this.cartItems)).length;
+    return this.page.locator(this.cartItems).count();
+  }
+
+  async expectItemCount(count: number) {
+    await expect(this.page.locator(this.cartItems)).toHaveCount(count);
   }
 }
